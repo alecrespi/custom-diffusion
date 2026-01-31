@@ -1,0 +1,16 @@
+clip-retrieval==2.44.0
+diffusers==0.36.0
+einops==0.3.0
+gdown==5.2.1
+imageio-ffmpeg==0.4.2
+imgaug==0.2.6
+invisible-watermark==0.2.0
+kornia==0.6.0
+omegaconf==2.1.1
+pudb==2019.2
+PySocks==1.7.1
+pytorch-lightning==1.4.2
+test-tube==0.7.5
+torch-fidelity==0.3.0
+transformers==4.19.2
+

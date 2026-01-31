@@ -1,0 +1,10 @@
+name: /eos/user/a/acrespi/NN-projects/cd-env-2
+channels:
+  - defaults
+dependencies:
+  - torchvision=0.12.0
+  - pip=20.3
+  - python=3.8.5
+  - numpy=1.19.2
+  - cudatoolkit=11.3
+prefix: /eos/user/a/acrespi/NN-projects/cd-env-2
