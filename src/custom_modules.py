@@ -214,7 +214,7 @@ import torch.nn as nn
 import transformers
 from transformers import CLIPTokenizer, CLIPTextModel
 from huggingface_hub import snapshot_download
-
+import os
 
 class AbstractEncoder(nn.Module):
     def __init__(self):
@@ -246,7 +246,7 @@ class FrozenCLIPEmbedderWrapper(AbstractEncoder):
             )
             return local_dir  # load from this explicit local path
         
-        cache_root = "/eos/user/a/acrespi/NN-projects/hf_cache"
+        cache_root = os.environ['HF_HUB_CACHE']
         source = _hf_resolve(version, cache_root)
 
         self.tokenizer = CLIPTokenizer.from_pretrained(source, cache_dir=cache_root, local_files_only=True)
