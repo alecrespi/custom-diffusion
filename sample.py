@@ -106,6 +106,10 @@ from contextlib import contextmanager, nullcontext
 from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.models.diffusion.plms import PLMSSampler
+
+import pytorch_lightning as pl
+import torch.serialization
+
 import wandb
 
 def load_model_from_config(config, ckpt, verbose=False):
@@ -310,6 +314,9 @@ def main():
         config.model.params.cond_stage_config.target = 'src.custom_modules.FrozenCLIPEmbedderWrapper'
         config.model.params.cond_stage_config.params = {}
         config.model.params.cond_stage_config.params.modifier_token = opt.modifier_token
+    # fixing UnpiklingError  
+    torch.serialization.add_safe_globals([pl.callbacks.model_checkpoint.ModelCheckpoint])
+
     model = load_model_from_config(config, f"{opt.ckpt}")
 
     if opt.delta_ckpt is not None:
