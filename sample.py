@@ -114,7 +114,7 @@ import wandb
 
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
-    pl_sd = torch.load(ckpt, map_location="cpu")
+    pl_sd = torch.load(ckpt, map_location="cpu", weigths_only=False)
     if "global_step" in pl_sd:
         print(f"Global Step: {pl_sd['global_step']}")
     sd = pl_sd["state_dict"]
@@ -315,12 +315,12 @@ def main():
         config.model.params.cond_stage_config.params = {}
         config.model.params.cond_stage_config.params.modifier_token = opt.modifier_token
     # fixing UnpiklingError  
-    torch.serialization.add_safe_globals([pl.callbacks.model_checkpoint.ModelCheckpoint])
+    # torch.serialization.add_safe_globals([pl.callbacks.model_checkpoint.ModelCheckpoint])
 
     model = load_model_from_config(config, f"{opt.ckpt}")
 
     if opt.delta_ckpt is not None:
-        delta_st = torch.load(opt.delta_ckpt)
+        delta_st = torch.load(opt.delta_ckpt, weights_only=False)
         embed = None
         if 'embed' in delta_st['state_dict']:
             embed = delta_st['state_dict']['embed'].reshape(-1,768)
