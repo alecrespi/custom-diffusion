@@ -761,13 +761,13 @@ if __name__ == "__main__":
 
         model = instantiate_from_config(config.model)
         if opt.resume_from_checkpoint_custom:
-            st = torch.load(opt.resume_from_checkpoint_custom, map_location='cpu', weigths_only=False)["state_dict"]
+            st = torch.load(opt.resume_from_checkpoint_custom, map_location='cpu', weights_only=False)["state_dict"]
             token_weights = st["cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"]
             del st["cond_stage_model.transformer.text_model.embeddings.token_embedding.weight"]
             model.load_state_dict(st, strict=False)
             model.cond_stage_model.transformer.text_model.embeddings.token_embedding.weight.data[:token_weights.shape[0]] = token_weights 
         if opt.delta_ckpt is not None:
-            st = torch.load(opt.delta_ckpt, weigths_only=False)
+            st = torch.load(opt.delta_ckpt, weights_only=False)
             embed = None
             if 'embed' in st:
                 embed = st['embed'].reshape(-1, 768)

@@ -114,7 +114,7 @@ import wandb
 
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
-    pl_sd = torch.load(ckpt, map_location="cpu", weigths_only=False)
+    pl_sd = torch.load(ckpt, map_location="cpu", weights_only=False)
     if "global_step" in pl_sd:
         print(f"Global Step: {pl_sd['global_step']}")
     sd = pl_sd["state_dict"]
