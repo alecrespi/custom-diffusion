@@ -9,12 +9,14 @@ import torch
 def main(path, newtoken=0):
     layers = []
     for files in glob.glob(f'{path}/checkpoints/*'):
-        if ('=' in files or '_' in files) and 'delta' not in files:
+        if (('=' in files or '_' in files) and 'delta' not in files) or 'last' in files:
             print(files)
             if '=' in files:
                 epoch_number = files.split('=')[1].split('.ckpt')[0]
             elif '_' in files:
                 epoch_number = files.split('/')[-1].split('.ckpt')[0]
+            else
+                epoch_number = str(-1)
 
             st = torch.load(files)["state_dict"]
             if len(layers) == 0:
