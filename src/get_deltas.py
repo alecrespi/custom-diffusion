@@ -18,7 +18,7 @@ def main(path, newtoken=0):
             else:
                 epoch_number = str(-1)
 
-            st = torch.load(files)["state_dict"]
+            st = torch.load(files, weights_only=False)["state_dict"]
             if len(layers) == 0:
                 for key in list(st.keys()):
                     if 'attn2.to_k' in key or 'attn2.to_v' in key:
