@@ -15,7 +15,7 @@ def main(path, newtoken=0):
                 epoch_number = files.split('=')[1].split('.ckpt')[0]
             elif '_' in files:
                 epoch_number = files.split('/')[-1].split('.ckpt')[0]
-            else
+            else:
                 epoch_number = str(-1)
 
             st = torch.load(files)["state_dict"]
