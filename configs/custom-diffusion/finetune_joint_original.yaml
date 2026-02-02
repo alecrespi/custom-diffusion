@@ -172,13 +172,11 @@ data:
 
 
 lightning:
+  modelcheckpoint:
+    params:
+      save_top_k: 0
+      save_last: true
   callbacks:
-    metrics_over_trainsteps_checkpoint:
-      params:
-        save_top_k: 1
-        every_n_train_steps: 50
-        save_last: true
-        save_weights_only: true
     image_logger:
       target: train.ImageLogger
       params:
