@@ -176,11 +176,7 @@ class MaskBase(Dataset):
         }
 
         self.size = size
-        self.interpolation = {"linear": PIL.Image.LINEAR,
-                              "bilinear": PIL.Image.BILINEAR,
-                              "bicubic": PIL.Image.BICUBIC,
-                              "lanczos": PIL.Image.LANCZOS,
-                              }[interpolation]
+        self.interpolation = self.interpolation[interpolation]
         self.flip = transforms.RandomHorizontalFlip(p=flip_p)
         self.caption = caption
 
